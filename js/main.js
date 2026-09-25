@@ -387,4 +387,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
+
+  // 9. Disclaimer Section Copy to Clipboard
+  document.querySelectorAll('.copy-disclaimer-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = btn.getAttribute('data-target');
+      const article = document.getElementById(targetId) || btn.closest('.disclaimer-card');
+      if (article) {
+        const titleElem = article.querySelector('h3');
+        const title = titleElem ? titleElem.innerText.replace(/\s+/g, ' ').trim() : 'Safety Disclaimer';
+        const paragraphs = Array.from(article.querySelectorAll('p')).map(p => p.innerText.trim()).filter(Boolean).join('\n\n');
+        const listItems = Array.from(article.querySelectorAll('li')).map(li => `• ${li.innerText.trim()}`).join('\n');
+        
+        let fullDisclaimerText = `📜 ${title}\n\n${paragraphs}`;
+        if (listItems) {
+          fullDisclaimerText += `\n\nKey Guidelines:\n${listItems}`;
+        }
+        fullDisclaimerText += `\n\n🔗 Reference: https://electronix-store.netlify.app/disclaimers.html#${targetId}`;
+        
+        copyTextToClipboard(fullDisclaimerText, `Copied ${title.split(' ')[0]} ${title.split(' ')[1] || ''}!`);
+      }
+    });
+  });
 });
+
