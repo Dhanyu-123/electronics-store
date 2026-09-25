@@ -17,7 +17,12 @@ const BUNNY_CDN_CONFIG = {
   assets: {
     heroBanner: '/banners/cleanroom-pcb-assembly-1200x630.jpg',
     ogDefault: '/og/electronix-og-preview-1200x630.png',
-    esp32Kit: '/products/esp32-s3-pro-devkit.jpg',
+    arduinoUno: 'assets/images/arduino-uno-r3.jpg',
+    raspberryPi4: 'assets/images/raspberry-pi-4-model-b.jpg',
+    esp32Kit: 'assets/images/esp32-nodemcu-boards.jpg',
+    sensorsMicPack: 'assets/images/sensors-and-mic-pack.jpg',
+    max9814Mic: 'assets/images/max9814-microphone-module.jpg',
+    stemRoboticsKit: 'assets/images/stem-robotics-kit.jpg',
     stm32Board: '/products/stm32h7-core-board.jpg',
     raspberryPiKit: '/products/rp2040-maker-starter-kit.jpg',
     sensorKit: '/products/37-in-1-sensor-laboratory-kit.jpg',
@@ -31,7 +36,19 @@ const BUNNY_CDN_CONFIG = {
   demoFallbacks: {
     '/banners/cleanroom-pcb-assembly-1200x630.jpg': 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=630&q=85',
     '/og/electronix-og-preview-1200x630.png': 'https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?auto=format&fit=crop&w=1200&h=630&q=85',
-    '/products/esp32-s3-pro-devkit.jpg': 'https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=800&q=80',
+    'assets/images/arduino-uno-r3.jpg': 'assets/images/arduino-uno-r3.jpg',
+    'assets/images/raspberry-pi-4-model-b.jpg': 'assets/images/raspberry-pi-4-model-b.jpg',
+    'assets/images/esp32-nodemcu-boards.jpg': 'assets/images/esp32-nodemcu-boards.jpg',
+    'assets/images/sensors-and-mic-pack.jpg': 'assets/images/sensors-and-mic-pack.jpg',
+    'assets/images/max9814-microphone-module.jpg': 'assets/images/max9814-microphone-module.jpg',
+    'assets/images/stem-robotics-kit.jpg': 'assets/images/stem-robotics-kit.jpg',
+    '/products/arduino-uno-r3.jpg': 'assets/images/arduino-uno-r3.jpg',
+    '/products/raspberry-pi-4-model-b.jpg': 'assets/images/raspberry-pi-4-model-b.jpg',
+    '/products/esp32-nodemcu-boards.jpg': 'assets/images/esp32-nodemcu-boards.jpg',
+    '/products/sensors-and-mic-pack.jpg': 'assets/images/sensors-and-mic-pack.jpg',
+    '/products/max9814-microphone-module.jpg': 'assets/images/max9814-microphone-module.jpg',
+    '/products/stem-robotics-kit.jpg': 'assets/images/stem-robotics-kit.jpg',
+    '/products/esp32-s3-pro-devkit.jpg': 'assets/images/esp32-nodemcu-boards.jpg',
     '/products/stm32h7-core-board.jpg': 'https://images.unsplash.com/photo-1608555855762-2b657eb1c348?auto=format&fit=crop&w=800&q=80',
     '/products/rp2040-maker-starter-kit.jpg': 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
     '/products/37-in-1-sensor-laboratory-kit.jpg': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80',
@@ -48,10 +65,10 @@ const BUNNY_CDN_CONFIG = {
  * @returns {string} Fully qualified CDN or fallback URL
  */
 function getBunnyAssetUrl(relativePath) {
-  // If Bunny CDN is ready and active:
-  // return `${BUNNY_CDN_CONFIG.pullZoneUrl}${relativePath}`;
-
-  // For initial immediate preview while Bunny DNS is set up:
+  // If it's a direct local asset or in demoFallbacks:
+  if (relativePath.startsWith('assets/') || relativePath.startsWith('./assets/')) {
+    return relativePath;
+  }
   if (BUNNY_CDN_CONFIG.demoFallbacks[relativePath]) {
     return BUNNY_CDN_CONFIG.demoFallbacks[relativePath];
   }

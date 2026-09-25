@@ -43,7 +43,7 @@
   <!-- Top Announcement Bar -->
   <div style="background-color: var(--ibm-gray-100); color: var(--ibm-white); padding: 0.45rem 0; font-size: 0.8rem; border-bottom: 1px solid var(--ibm-gray-80); font-family: var(--font-mono);">
     <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-      <div><span>ISO 9001:2015 CERTIFIED SILICON SOURCING • ALL ASSETS POWERED BY BUNNY.NET CDN</span></div>
+      <div><span>🇮🇳 AFFORDABLE ELECTRONIC COMPONENTS &amp; KITS FOR STUDENTS &amp; MAKERS • ALL PRICES IN INR (₹)</span></div>
       <div style="display: flex; gap: 1.25rem;">
         <a href="disclaimers.html#esd" style="color: #a8a8a8; text-decoration: none;">ESD Advisory</a>
         <a href="disclaimers.html#compliance" style="color: #a8a8a8; text-decoration: none;">RoHS Compliance</a>
@@ -65,25 +65,25 @@
         </div>
       </a>
 
-      <nav>
+      <div class="nav-wrapper">
         <ul class="nav-menu" id="navMenu">
           <li><a href="index.html" class="nav-link active">Home</a></li>
           <li><a href="catalog.html" class="nav-link">Components &amp; Kits</a></li>
-          <li><a href="product-detail.html" class="nav-link">Product Showcase</a></li>
+          <li><a href="product-detail.html" class="nav-link">Showcase</a></li>
           <li><a href="about.html" class="nav-link">Quality &amp; Lab</a></li>
           <li><a href="disclaimers.html" class="nav-link">Disclaimers &amp; Safety</a></li>
           <li><a href="contact.html" class="nav-link">Contact &amp; RFQ</a></li>
         </ul>
-      </nav>
+      </div>
 
       <div class="nav-actions">
-        <a href="#" class="whatsapp-share-btn whatsapp-share-trigger" title="Share current page via WhatsApp">
+        <a href="#" class="whatsapp-share-btn whatsapp-share-trigger" title="Share via WhatsApp">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.542 1.987.829 2.801.829h.005c3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.589-5.766-5.779-5.766zm9.969 5.828c0 5.523-4.477 10-10 10-1.745 0-3.385-.45-4.819-1.237l-5.181 1.357 1.379-5.037c-.86-1.472-1.379-3.195-1.379-5.083 0-5.523 4.477-10 10-10s10 4.477 10 10z"/>
           </svg>
           <span>Share</span>
         </a>
-        <a href="contact.html" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">
+        <a href="contact.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
           Request Quote &rarr;
         </a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu">
@@ -179,182 +179,186 @@
 
       <div class="product-grid" id="productGrid">
 
-        <!-- Product 1: ESP32-S3 Dev Kit -->
+        <!-- Product 1: Arduino Uno R3 -->
         <article class="product-card" data-category="microcontrollers">
           <div class="card-image-wrap">
-            <span class="badge badge-green card-badge-pos">BEST SELLER</span>
-            <img data-bunny-src="/products/esp32-s3-pro-devkit.jpg" alt="ESP32-S3 Pro Dual-Core AI Development Board" loading="lazy">
+            <span class="badge badge-green card-badge-pos">STUDENT FAVORITE</span>
+            <img src="assets/images/arduino-uno-r3.jpg" alt="Arduino Uno R3 Compatible Board" loading="lazy">
           </div>
           <div class="card-body">
             <div class="product-sku">
-              <span>SKU: ESP32-S3-WROOM-1</span>
-              <span class="badge badge-gray">QFN-56</span>
+              <span>SKU: ARD-UNO-R3-DIP</span>
+              <span class="badge badge-gray">ATmega328P</span>
             </div>
-            <h3 class="product-title">ESP32-S3 Dual-Core AI Dev Board</h3>
-            <p class="product-desc">Xtensa 32-bit LX7, 240MHz, 2.4GHz Wi-Fi + Bluetooth 5 (LE), built-in USB-OTG and RGB addressable LED.</p>
+            <h3 class="product-title">Arduino Uno R3 Compatible Board</h3>
+            <p class="product-desc">16MHz ATmega328P MCU with 14 digital I/O pins, 6 PWM channels, 6 analog inputs, and replaceable DIP chip. Ideal for school &amp; college robotics.</p>
             <div class="spec-pills">
-              <span class="spec-pill">3.3V Logic</span>
-              <span class="spec-pill">8MB PSRAM</span>
-              <span class="spec-pill">16MB Flash</span>
-              <span class="spec-pill">RoHS Compliant</span>
+              <span class="spec-pill">5V Operating</span>
+              <span class="spec-pill">16MHz Clock</span>
+              <span class="spec-pill">Type-B USB</span>
+              <span class="spec-pill">Made for Beginners</span>
+            </div>
+            <div class="card-footer">
+              <div class="price-box">
+                <span class="price-label">Student Price</span>
+                <span class="price-value">₹285</span>
+              </div>
+              <a href="contact.html?sku=ARD-UNO-R3-DIP" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                Inquire &rarr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 2: Raspberry Pi 4 Model B -->
+        <article class="product-card" data-category="microcontrollers">
+          <div class="card-image-wrap">
+            <span class="badge badge-blue card-badge-pos">QUAD-CORE SBC</span>
+            <img src="assets/images/raspberry-pi-4-model-b.jpg" alt="Raspberry Pi 4 Model B" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="product-sku">
+              <span>SKU: RPI-4B-4GB</span>
+              <span class="badge badge-gray">BCM2711</span>
+            </div>
+            <h3 class="product-title">Raspberry Pi 4 Model B (4GB RAM)</h3>
+            <p class="product-desc">64-bit quad-core ARM Cortex-A72 @ 1.5GHz, dual 4K micro-HDMI, Gigabit Ethernet, 2x USB 3.0, and 2.4/5.0GHz dual-band Wi-Fi.</p>
+            <div class="spec-pills">
+              <span class="spec-pill">4GB LPDDR4</span>
+              <span class="spec-pill">Dual 4K Video</span>
+              <span class="spec-pill">USB-C Power</span>
+              <span class="spec-pill">Linux Ready</span>
             </div>
             <div class="card-footer">
               <div class="price-box">
                 <span class="price-label">Unit Price</span>
-                <span class="price-value">$9.80</span>
+                <span class="price-value">₹3,850</span>
               </div>
-              <a href="contact.html?sku=ESP32-S3-WROOM-1" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <a href="contact.html?sku=RPI-4B-4GB" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                 Inquire &rarr;
               </a>
             </div>
           </div>
         </article>
 
-        <!-- Product 2: STM32H7 High Performance Board -->
-        <article class="product-card" data-category="microcontrollers">
-          <div class="card-image-wrap">
-            <span class="badge badge-blue card-badge-pos">INDUSTRIAL</span>
-            <img data-bunny-src="/products/stm32h7-core-board.jpg" alt="STM32H743 High Performance ARM Cortex M7" loading="lazy">
-          </div>
-          <div class="card-body">
-            <div class="product-sku">
-              <span>SKU: STM32H743VIT6</span>
-              <span class="badge badge-gray">LQFP-100</span>
-            </div>
-            <h3 class="product-title">STM32H743VIT6 High-Performance Board</h3>
-            <p class="product-desc">480MHz ARM Cortex-M7 with double-precision FPU, 2MB Flash, 1MB RAM, dual CAN-FD, and Ethernet MAC.</p>
-            <div class="spec-pills">
-              <span class="spec-pill">3.3V Operating</span>
-              <span class="spec-pill">480MHz</span>
-              <span class="spec-pill">16-bit ADC</span>
-              <span class="spec-pill">ESD Protected</span>
-            </div>
-            <div class="card-footer">
-              <div class="price-box">
-                <span class="price-label">Unit Price</span>
-                <span class="price-value">$24.50</span>
-              </div>
-              <a href="contact.html?sku=STM32H743VIT6" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
-                Inquire &rarr;
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Product 3: 37-in-1 Sensor Laboratory Kit -->
-        <article class="product-card" data-category="sensors">
-          <div class="card-image-wrap">
-            <span class="badge badge-warning card-badge-pos">KIT BUNDLE</span>
-            <img data-bunny-src="/products/37-in-1-sensor-laboratory-kit.jpg" alt="37-in-1 Sensor Modules Laboratory Kit" loading="lazy">
-          </div>
-          <div class="card-body">
-            <div class="product-sku">
-              <span>SKU: KIT-SENS-37PRO</span>
-              <span class="badge badge-gray">BOX SET</span>
-            </div>
-            <h3 class="product-title">37-in-1 Sensor Module Master Kit</h3>
-            <p class="product-desc">Comprehensive suite of ultrasonic, temperature/humidity (DHT22), gyro (MPU6050), hall-effect, and optical sensors.</p>
-            <div class="spec-pills">
-              <span class="spec-pill">3.3V / 5.0V</span>
-              <span class="spec-pill">37 Modules</span>
-              <span class="spec-pill">Sample Code Incl.</span>
-            </div>
-            <div class="card-footer">
-              <div class="price-box">
-                <span class="price-label">Kit Price</span>
-                <span class="price-value">$32.00</span>
-              </div>
-              <a href="contact.html?sku=KIT-SENS-37PRO" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
-                Inquire &rarr;
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Product 4: DSO DIY Oscilloscope Kit -->
+        <!-- Product 3: Complete STEM Robotics Starter Kit -->
         <article class="product-card" data-category="kits">
           <div class="card-image-wrap">
-            <span class="badge badge-blue card-badge-pos">MAKER KIT</span>
-            <img data-bunny-src="/products/dso-digital-oscilloscope-diy-kit.jpg" alt="DSO 138 DIY Digital Oscilloscope Kit" loading="lazy">
+            <span class="badge badge-warning card-badge-pos">BEST VALUE KIT</span>
+            <img src="assets/images/stem-robotics-kit.jpg" alt="Complete STEM Robotics Starter Kit" loading="lazy">
           </div>
           <div class="card-body">
             <div class="product-sku">
-              <span>SKU: KIT-DSO-138</span>
-              <span class="badge badge-gray">SMD + THT</span>
+              <span>SKU: KIT-STEM-ROBO-PRO</span>
+              <span class="badge badge-gray">70+ PARTS</span>
             </div>
-            <h3 class="product-title">DSO Digital Oscilloscope Assembly Kit</h3>
-            <p class="product-desc">Educational soldering kit with 2.4-inch color TFT, 1Msps sampling rate, analog bandwidth up to 200KHz.</p>
+            <h3 class="product-title">Complete STEM Robotics Starter Kit</h3>
+            <p class="product-desc">All-in-one educational organizer box with Arduino &amp; Pi compatibility: dual DC gear motors, wheels, micro servo, ultrasonic sensor, breadboard, wires &amp; manual.</p>
             <div class="spec-pills">
-              <span class="spec-pill">9V DC Input</span>
-              <span class="spec-pill">2.4" TFT Display</span>
-              <span class="spec-pill">DIY Assembly</span>
+              <span class="spec-pill">70+ Components</span>
+              <span class="spec-pill">Organizer Box</span>
+              <span class="spec-pill">Step-by-Step Guide</span>
+              <span class="spec-pill">School / College</span>
             </div>
             <div class="card-footer">
               <div class="price-box">
                 <span class="price-label">Kit Price</span>
-                <span class="price-value">$28.90</span>
+                <span class="price-value">₹999</span>
               </div>
-              <a href="contact.html?sku=KIT-DSO-138" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <a href="contact.html?sku=KIT-STEM-ROBO-PRO" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                 Inquire &rarr;
               </a>
             </div>
           </div>
         </article>
 
-        <!-- Product 5: Adjustable Buck Power Module -->
-        <article class="product-card" data-category="power">
+        <!-- Product 4: Sensors & Microphone Starter Pack -->
+        <article class="product-card" data-category="sensors">
           <div class="card-image-wrap">
-            <span class="badge badge-green card-badge-pos">IN-STOCK</span>
-            <img data-bunny-src="/products/adjustable-dc-buck-converter-module.jpg" alt="LM2596S DC-DC Step-Down Power Module" loading="lazy">
+            <span class="badge badge-green card-badge-pos">AFFORDABLE COMBO</span>
+            <img src="assets/images/sensors-and-mic-pack.jpg" alt="Sensors and Microphone Module Pack" loading="lazy">
           </div>
           <div class="card-body">
             <div class="product-sku">
-              <span>SKU: MOD-LM2596S-ADJ</span>
-              <span class="badge badge-gray">PCB MODULE</span>
+              <span>SKU: SENS-TRIO-PACK</span>
+              <span class="badge badge-gray">3 SENSORS</span>
             </div>
-            <h3 class="product-title">LM2596S Step-Down DC-DC Buck Module</h3>
-            <p class="product-desc">High-efficiency switching regulator converting 4V-35V input down to 1.23V-30V with 3A max output current capability.</p>
+            <h3 class="product-title">Sensors &amp; Microphone 3-in-1 Pack</h3>
+            <p class="product-desc">Essential student sensor trio: HC-SR04 Ultrasonic Distance Sensor, DHT11 Temperature/Humidity Sensor, and LM393 Electret Sound Mic module.</p>
             <div class="spec-pills">
-              <span class="spec-pill">92% Efficiency</span>
-              <span class="spec-pill">3A Max Peak</span>
-              <span class="spec-pill">Thermal Cutoff</span>
+              <span class="spec-pill">3.3V / 5.0V</span>
+              <span class="spec-pill">Ultrasonic + DHT11</span>
+              <span class="spec-pill">Sound Detector</span>
+              <span class="spec-pill">Ultra Budget</span>
+            </div>
+            <div class="card-footer">
+              <div class="price-box">
+                <span class="price-label">Combo Price</span>
+                <span class="price-value">₹95</span>
+              </div>
+              <a href="contact.html?sku=SENS-TRIO-PACK" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                Inquire &rarr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 5: MAX9814 Audio Microphone with AGC -->
+        <article class="product-card" data-category="sensors">
+          <div class="card-image-wrap">
+            <span class="badge badge-blue card-badge-pos">LOW NOISE AGC</span>
+            <img src="assets/images/max9814-microphone-module.jpg" alt="MAX9814 Microphone Module with AGC" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="product-sku">
+              <span>SKU: SENS-MIC-MAX9814</span>
+              <span class="badge badge-gray">AUDIO PRE-AMP</span>
+            </div>
+            <h3 class="product-title">MAX9814 Microphone Module with AGC</h3>
+            <p class="product-desc">Low-noise microphone amplifier with automatic gain control (40dB / 50dB / 60dB) and 20Hz-20KHz response for voice projects, FFT, and noise level monitoring.</p>
+            <div class="spec-pills">
+              <span class="spec-pill">2.7V - 5.5V</span>
+              <span class="spec-pill">Auto Gain (AGC)</span>
+              <span class="spec-pill">Electret Capsule</span>
+              <span class="spec-pill">High SNR</span>
             </div>
             <div class="card-footer">
               <div class="price-box">
                 <span class="price-label">Unit Price</span>
-                <span class="price-value">$2.40</span>
+                <span class="price-value">₹125</span>
               </div>
-              <a href="contact.html?sku=MOD-LM2596S-ADJ" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <a href="contact.html?sku=SENS-MIC-MAX9814" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                 Inquire &rarr;
               </a>
             </div>
           </div>
         </article>
 
-        <!-- Product 6: OLED Smart Soldering Station Kit -->
-        <article class="product-card" data-category="tools">
+        <!-- Product 6: ESP32 & NodeMCU IoT Boards -->
+        <article class="product-card" data-category="microcontrollers">
           <div class="card-image-wrap">
-            <span class="badge badge-blue card-badge-pos">EQUIPMENT</span>
-            <img data-bunny-src="/products/smart-oled-soldering-station-kit.jpg" alt="T12 Smart OLED Soldering Station DIY Kit" loading="lazy">
+            <span class="badge badge-green card-badge-pos">WI-FI + BLE</span>
+            <img src="assets/images/esp32-nodemcu-boards.jpg" alt="ESP32 and NodeMCU Microcontrollers" loading="lazy">
           </div>
           <div class="card-body">
             <div class="product-sku">
-              <span>SKU: TOOL-T12-OLED</span>
-              <span class="badge badge-gray">T12 SYSTEM</span>
+              <span>SKU: MCU-ESP32-WROOM</span>
+              <span class="badge badge-gray">DUAL CORE</span>
             </div>
-            <h3 class="product-title">T12 Smart OLED Soldering Station Kit</h3>
-            <p class="product-desc">Microcontroller-driven temperature regulation from 150°C to 480°C. 8-second rapid heating with auto-sleep safety.</p>
+            <h3 class="product-title">ESP32 &amp; NodeMCU IoT Development Board</h3>
+            <p class="product-desc">Dual-core 240MHz Xtensa MCU with integrated 2.4GHz Wi-Fi + Bluetooth 4.2/5.0, 38-pin breadboard spacing, and CP2102 USB-to-UART converter.</p>
             <div class="spec-pills">
-              <span class="spec-pill">72W Output</span>
-              <span class="spec-pill">PID Control</span>
-              <span class="spec-pill">ESD Grounded</span>
+              <span class="spec-pill">240MHz Dual-Core</span>
+              <span class="spec-pill">Wi-Fi + BLE</span>
+              <span class="spec-pill">Micro-USB</span>
+              <span class="spec-pill">Arduino IDE Ready</span>
             </div>
             <div class="card-footer">
               <div class="price-box">
-                <span class="price-label">Kit Price</span>
-                <span class="price-value">$46.00</span>
+                <span class="price-label">Unit Price</span>
+                <span class="price-value">₹280</span>
               </div>
-              <a href="contact.html?sku=TOOL-T12-OLED" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <a href="contact.html?sku=MCU-ESP32-WROOM" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                 Inquire &rarr;
               </a>
             </div>

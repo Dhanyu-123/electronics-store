@@ -13,6 +13,7 @@
   height: var(--nav-height);
   display: flex;
   align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -20,6 +21,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  gap: 1.5rem;
 }
 
 .brand-logo {
@@ -28,11 +30,12 @@
   gap: 0.75rem;
   text-decoration: none !important;
   color: var(--ibm-gray-100);
+  flex-shrink: 0;
 }
 
 .brand-icon {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   background-color: var(--ibm-blue-60);
   display: flex;
   align-items: center;
@@ -40,7 +43,8 @@
   color: var(--ibm-white);
   font-weight: 700;
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  border-radius: 2px;
 }
 
 .brand-text {
@@ -48,70 +52,93 @@
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ibm-gray-100);
+  line-height: 1.1;
 }
 
 .brand-tag {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--ibm-blue-60);
   font-family: var(--font-mono);
   display: block;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  justify-content: center;
+  gap: 1.25rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
-  color: var(--ibm-gray-70);
-  font-size: 0.95rem;
+  color: var(--ibm-gray-80);
+  font-size: 0.92rem;
   font-weight: 500;
-  padding: 0.5rem 0;
+  padding: 0.45rem 0.75rem;
+  border-radius: 4px;
   position: relative;
   text-decoration: none !important;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  color: var(--ibm-blue-60);
+  background-color: var(--ibm-blue-10);
+}
+
 .nav-link.active {
   color: var(--ibm-blue-60);
+  background-color: var(--ibm-blue-10);
+  font-weight: 600;
 }
 
 .nav-link.active::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
+  bottom: 0px;
+  left: 15%;
+  width: 70%;
   height: 2px;
   background-color: var(--ibm-blue-60);
+  border-radius: 2px;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
+  flex-shrink: 0;
 }
 
 .mobile-toggle {
   display: none;
   background: none;
-  border: none;
+  border: 1px solid var(--ibm-gray-30);
+  border-radius: 4px;
   padding: 0.5rem;
   cursor: pointer;
 }
 
 .mobile-toggle span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background-color: var(--ibm-gray-100);
-  margin: 5px 0;
+  margin: 4px 0;
   transition: var(--transition-fast);
 }
 
@@ -664,6 +691,38 @@ textarea.form-control {
 }
 
 /* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .mobile-toggle {
+    display: block;
+  }
+  .nav-wrapper {
+    display: none;
+  }
+  .nav-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--ibm-white);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--ibm-blue-60);
+    box-shadow: var(--shadow-high);
+    display: none;
+    z-index: 999;
+  }
+  .nav-menu.open {
+    display: flex;
+  }
+  .nav-link {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--ibm-gray-10);
+  }
+}
+
 @media (max-width: 992px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -679,25 +738,6 @@ textarea.form-control {
 }
 
 @media (max-width: 768px) {
-  .mobile-toggle {
-    display: block;
-  }
-  .nav-menu {
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
-    width: 100%;
-    background-color: var(--ibm-white);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--ibm-gray-20);
-    box-shadow: var(--shadow-medium);
-    display: none;
-  }
-  .nav-menu.open {
-    display: flex;
-  }
   .form-row {
     grid-template-columns: 1fr;
   }
