@@ -1,0 +1,58 @@
+# ==============================================================================
+# NETLIFY DEPLOYMENT & CI/CD CONFIGURATION
+# Electronic Components & Kits Web Platform
+# ==============================================================================
+
+[build]
+  # Static publish directory (root directory)
+  publish = "."
+
+# Build environment variables (can also be managed in Netlify dashboard)
+[build.environment]
+  NODE_VERSION = "20"
+
+# Form Handling Configuration:
+# Netlify automatically discovers forms with data-netlify="true" during deploy.
+# To configure direct email notifications on every form submission:
+# 1. Go to Netlify Dashboard -> Site Configuration -> Forms
+# 2. Click "Form notifications" -> "Add notification" -> "Email notification"
+# 3. Enter your destination email address (e.g. sales@yourdomain.com)
+
+# Security and Optimization Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Modern Content Security Policy allowing Bunny.net, Clarity & Google Analytics
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: https://*.b-cdn.net https://images.unsplash.com https://www.google-analytics.com https://www.clarity.ms;
+      connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.clarity.ms https://*.b-cdn.net;
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+    """
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Cache static assets (CSS, JS, Fonts) aggressively for speed
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache HTML files with revalidation
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

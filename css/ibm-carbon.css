@@ -1,0 +1,239 @@
+/* ==========================================================================
+   IBM CARBON DESIGN SYSTEM TOKENS & BASE STYLING
+   Electronic Components & Kits Web Platform
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* IBM Core Brand Colors */
+  --ibm-blue-60: #0f62fe;        /* Primary Brand Accent */
+  --ibm-blue-70: #0043ce;        /* Hover / Interactive */
+  --ibm-blue-80: #002d9c;        /* Active / Pressed */
+  --ibm-blue-10: #edf5ff;        /* Light Tint / Subtle background */
+  --ibm-blue-20: #d0e2ff;        /* Border / Active tint */
+
+  /* Neutral Dark Scale (Gray 100 / Gray 90 / Gray 80) */
+  --ibm-gray-100: #161616;       /* Deepest Charcoal / Background / Text Primary Dark */
+  --ibm-gray-90: #262626;        /* Surface Dark / Elevated Containers */
+  --ibm-gray-80: #393939;        /* Borders / Subtle dividers */
+  --ibm-gray-70: #525252;        /* Secondary Dark / Subtitles */
+  --ibm-gray-60: #6f6f6f;        /* Mid Gray */
+
+  /* Neutral Light Scale */
+  --ibm-gray-10: #f4f4f4;        /* Off-white background / light sections */
+  --ibm-gray-20: #e0e0e0;        /* Light borders & divider lines */
+  --ibm-gray-30: #c6c6c6;        /* Placeholder text */
+  --ibm-white: #ffffff;          /* Pure White */
+
+  /* Status & Engineering Alert Colors */
+  --ibm-support-error: #da1e28;
+  --ibm-support-success: #24a148;
+  --ibm-support-warning: #f1c21b;
+  --ibm-support-info: #0043ce;
+
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Elevation Shadows */
+  --shadow-low: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-high: 0 12px 24px rgba(0, 0, 0, 0.16);
+  --shadow-ibm-blue: 0 4px 16px rgba(15, 98, 254, 0.25);
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
+  --transition-normal: 0.25s cubic-bezier(0.2, 0, 0.38, 0.9);
+
+  /* Layout */
+  --max-width: 1280px;
+  --nav-height: 72px;
+}
+
+/* Reset & Base Rules */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--ibm-white);
+  color: var(--ibm-gray-100);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings with IBM Editorial Precision */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ibm-gray-100);
+}
+
+h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); letter-spacing: -0.02em; font-weight: 400; }
+h1 strong { font-weight: 600; color: var(--ibm-blue-60); }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+h3 { font-size: 1.35rem; font-weight: 600; }
+h4 { font-size: 1.1rem; font-weight: 600; }
+
+p {
+  color: var(--ibm-gray-70);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--ibm-blue-60);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--ibm-blue-70);
+  text-decoration: underline;
+}
+
+/* Monospace for Component SKUs, Pinouts & Specs */
+code, pre, .sku-tag, .spec-code {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+/* Container Utility */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* IBM Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none !important;
+}
+
+.btn-primary {
+  background-color: var(--ibm-blue-60);
+  color: var(--ibm-white);
+  border-color: var(--ibm-blue-60);
+}
+.btn-primary:hover {
+  background-color: var(--ibm-blue-70);
+  border-color: var(--ibm-blue-70);
+  color: var(--ibm-white);
+}
+
+.btn-secondary {
+  background-color: var(--ibm-gray-90);
+  color: var(--ibm-white);
+  border-color: var(--ibm-gray-90);
+}
+.btn-secondary:hover {
+  background-color: var(--ibm-gray-100);
+  color: var(--ibm-white);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--ibm-blue-60);
+  border-color: var(--ibm-blue-60);
+}
+.btn-ghost:hover {
+  background-color: var(--ibm-blue-10);
+  color: var(--ibm-blue-70);
+}
+
+.btn-dark-ghost {
+  background-color: transparent;
+  color: var(--ibm-white);
+  border-color: var(--ibm-gray-70);
+}
+.btn-dark-ghost:hover {
+  background-color: var(--ibm-gray-80);
+  border-color: var(--ibm-white);
+  color: var(--ibm-white);
+}
+
+/* Technical Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+}
+
+.badge-blue {
+  background-color: var(--ibm-blue-10);
+  color: var(--ibm-blue-70);
+  border: 1px solid var(--ibm-blue-20);
+}
+
+.badge-green {
+  background-color: #defbe6;
+  color: #0e6027;
+  border: 1px solid #a7f0ba;
+}
+
+.badge-warning {
+  background-color: #fef0c7;
+  color: #8f6b00;
+  border: 1px solid #fde28e;
+}
+
+.badge-gray {
+  background-color: var(--ibm-gray-20);
+  color: var(--ibm-gray-90);
+}
+
+/* Alert Boxes */
+.alert-box {
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--ibm-blue-60);
+  background-color: var(--ibm-gray-10);
+  margin: 1.5rem 0;
+}
+
+.alert-box.alert-warning {
+  border-left-color: var(--ibm-support-warning);
+  background-color: #fff9e6;
+}
+
+.alert-box.alert-danger {
+  border-left-color: var(--ibm-support-error);
+  background-color: #fff1f1;
+}
+
+.alert-box h4 {
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
