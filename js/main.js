@@ -277,8 +277,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const copyBtn = document.createElement('button');
       copyBtn.type = 'button';
-      copyBtn.className = 'btn-icon-action btn-copy-card';
-      copyBtn.innerHTML = '📋 Copy';
+      copyBtn.className = 'btn-icon-logo btn-copy-logo btn-copy-card';
+      copyBtn.innerHTML = `
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      `;
       copyBtn.title = 'Copy product details and specs';
 
       copyBtn.addEventListener('click', (e) => {
@@ -287,8 +292,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const waBtn = document.createElement('a');
-      waBtn.className = 'btn-icon-action btn-wa-card';
-      waBtn.innerHTML = '📲 Share';
+      waBtn.className = 'btn-icon-logo btn-wa-logo btn-wa-card';
+      waBtn.innerHTML = `
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.542 1.987.829 2.801.829h.005c3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.589-5.766-5.779-5.766zm9.969 5.828c0 5.523-4.477 10-10 10-1.745 0-3.385-.45-4.819-1.237l-5.181 1.357 1.379-5.037c-.86-1.472-1.379-3.195-1.379-5.083 0-5.523 4.477-10 10-10s10 4.477 10 10z"/>
+        </svg>
+      `;
       waBtn.title = 'Share product on WhatsApp';
       waBtn.target = '_blank';
       waBtn.rel = 'noopener';
