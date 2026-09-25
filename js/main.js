@@ -1,7 +1,73 @@
 /**
- * Main Application Logic
+ * Main Application Logic & Interactive Experience
  * Electronic Components & Kits Platform
  */
+
+// Netlify Image CDN Helper (converts to small for thumbnail and large for modal)
+function getOptimizedImageUrl(src, width = 600, quality = 80) {
+  if (!src) return '';
+  if (window.location.hostname.includes('netlify.app')) {
+    const cleanPath = src.startsWith('/') ? src : '/' + src;
+    if (cleanPath.startsWith('/assets/')) {
+      return `/.netlify/images?url=${encodeURIComponent(cleanPath)}&w=${width}&q=${quality}`;
+    }
+  }
+  return src;
+}
+
+// Absolute Product Image URL for WhatsApp Sharing
+function getAbsoluteProductImageUrl(src) {
+  if (!src) return 'https://electronix-store.netlify.app/assets/images/whatsapp-og-banner.jpg';
+  if (src.startsWith('http://') || src.startsWith('https://')) return src;
+  const cleanPath = src.replace(/^\.?\//, '');
+  return `https://electronix-store.netlify.app/${cleanPath}`;
+}
+
+// Global Toast Notification Helper
+function showToast(message = 'Copied to clipboard!') {
+  let toast = document.getElementById('globalToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'globalToast';
+    toast.className = 'toast-alert';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<span>✓</span> <span>${message}</span>`;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
+// Universal Copy to Clipboard Helper
+function copyTextToClipboard(text, customToastMsg = 'Copied to clipboard!') {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(customToastMsg);
+    }).catch(() => {
+      fallbackCopyText(text, customToastMsg);
+    });
+  } else {
+    fallbackCopyText(text, customToastMsg);
+  }
+}
+
+function fallbackCopyText(text, customToastMsg) {
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'fixed';
+  textArea.style.left = '-999999px';
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    showToast(customToastMsg);
+  } catch (err) {
+    console.error('Fallback copy failed', err);
+  }
+  document.body.removeChild(textArea);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Mobile Navigation Toggle
@@ -9,13 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('navMenu');
 
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       navMenu.classList.toggle('open');
       const isExpanded = navMenu.classList.contains('open');
       mobileToggle.setAttribute('aria-expanded', isExpanded);
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
         navMenu.classList.remove('open');
@@ -41,11 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const matchesCategory = (currentCategory === 'all' || category === currentCategory);
       const matchesSearch = !searchQuery || title.includes(searchQuery) || sku.includes(searchQuery) || desc.includes(searchQuery);
 
-      if (matchesCategory && matchesSearch) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
+      card.style.display = (matchesCategory && matchesSearch) ? 'flex' : 'none';
     });
   }
 
@@ -71,8 +133,189 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Pre-fill Contact Form from URL Params (e.g. contact.html?sku=ESP32-S3-WROOM&type=sample)
+  // 3. Interactive Magnified Product Modal & Details Viewer
+  let modalBackdrop = document.getElementById('productDetailModal');
+  if (!modalBackdrop) {
+    modalBackdrop = document.createElement('div');
+    modalBackdrop.id = 'productDetailModal';
+    modalBackdrop.className = 'product-modal-backdrop';
+    modalBackdrop.innerHTML = `
+      <div class="product-modal-card" role="dialog" aria-modal="true">
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+        <div class="modal-grid">
+          <div class="modal-image-col">
+            <div class="modal-magnified-wrap">
+              <img id="modalProductImg" src="" alt="Product view" loading="lazy">
+            </div>
+            <div style="font-size: 0.8rem; color: #64748b; text-align: center;">🔍 Hover over image to inspect magnified silicon details</div>
+          </div>
+          <div class="modal-details-col">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span id="modalSku" style="font-family: var(--font-mono); font-weight: 700; color: #2563eb; font-size: 0.88rem;"></span>
+              <span id="modalBadge" class="badge badge-green">IN STOCK</span>
+            </div>
+            <h2 id="modalTitle" style="font-size: 1.5rem; margin-bottom: 0.75rem; color: #0f172a;"></h2>
+            <div style="display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.25rem;">
+              <span style="font-size: 0.82rem; text-transform: uppercase; font-weight: 700; color: #64748b;">Special Price:</span>
+              <span id="modalPrice" style="font-size: 1.75rem; font-weight: 800; color: #0f172a;"></span>
+            </div>
+            <p id="modalDesc" style="font-size: 0.98rem; line-height: 1.65; color: #334155; margin-bottom: 1.25rem;"></p>
+            <div id="modalSpecs" class="spec-pills" style="margin-bottom: 1.75rem;"></div>
+            
+            <!-- Quick Actions -->
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: auto;">
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button id="modalCopyBtn" class="btn btn-secondary" style="flex: 1; padding: 0.75rem 1rem;">
+                  📋 Copy Product Details
+                </button>
+                <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn" style="background-color: #25d366; color: #ffffff !important; flex: 1; padding: 0.75rem 1rem;">
+                  📲 Share on WhatsApp
+                </a>
+              </div>
+              <a id="modalRfqBtn" href="#" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">
+                Request Official Quote / Inquire &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modalBackdrop);
+  }
+
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const modalProductImg = document.getElementById('modalProductImg');
+  const modalSku = document.getElementById('modalSku');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalPrice = document.getElementById('modalPrice');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalSpecs = document.getElementById('modalSpecs');
+  const modalCopyBtn = document.getElementById('modalCopyBtn');
+  const modalWhatsAppBtn = document.getElementById('modalWhatsAppBtn');
+  const modalRfqBtn = document.getElementById('modalRfqBtn');
+
+  function closeModal() {
+    modalBackdrop.classList.remove('active');
+  }
+
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeModal);
+  }
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) closeModal();
+  });
+
+  function openProductModal(card) {
+    const title = card.querySelector('.product-title')?.textContent?.trim() || '';
+    const skuElem = card.querySelector('.product-sku span:first-child');
+    const rawSku = skuElem ? skuElem.textContent.replace('SKU:', '').trim() : '';
+    const price = card.querySelector('.price-value')?.textContent?.trim() || '';
+    const desc = card.querySelector('.product-desc')?.textContent?.trim() || '';
+    const imgElem = card.querySelector('.card-image-wrap img');
+    const imgSrc = imgElem ? imgElem.getAttribute('src') : '';
+    const badgeText = card.querySelector('.card-badge-pos')?.textContent?.trim() || 'IN STOCK';
+    const specPills = Array.from(card.querySelectorAll('.spec-pill')).map(p => p.textContent.trim());
+
+    modalTitle.textContent = title;
+    modalSku.textContent = `SKU: ${rawSku}`;
+    modalPrice.textContent = price;
+    modalDesc.textContent = desc;
+    modalProductImg.src = getOptimizedImageUrl(imgSrc, 1200, 90);
+    modalProductImg.alt = title;
+
+    modalSpecs.innerHTML = '';
+    specPills.forEach(spec => {
+      const span = document.createElement('span');
+      span.className = 'spec-pill';
+      span.textContent = spec;
+      modalSpecs.appendChild(span);
+    });
+
+    const fullImgUrl = getAbsoluteProductImageUrl(imgSrc);
+    const shareUrl = `${window.location.origin}/catalog.html?sku=${encodeURIComponent(rawSku)}`;
+    const copyContent = `⚡ ${title}\n💰 Price: ${price} (SKU: ${rawSku})\n📋 Specs: ${specPills.join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 Order / View: ${shareUrl}`;
+
+    modalCopyBtn.onclick = () => copyTextToClipboard(copyContent, `Copied "${title}" specs!`);
+
+    const waMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Specs: ${specPills.slice(0, 3).join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 Order / View on Electronix: ${shareUrl}`);
+    modalWhatsAppBtn.href = `https://api.whatsapp.com/send?text=${waMsg}`;
+
+    modalRfqBtn.href = `contact.html?sku=${encodeURIComponent(rawSku)}`;
+
+    modalBackdrop.classList.add('active');
+  }
+
+  // Bind clicks on product cards to open modal & add actions
+  productCards.forEach(card => {
+    const cardImg = card.querySelector('.card-image-wrap');
+    const cardTitle = card.querySelector('.product-title');
+
+    if (cardImg) {
+      cardImg.addEventListener('click', () => openProductModal(card));
+    }
+    if (cardTitle) {
+      cardTitle.addEventListener('click', () => openProductModal(card));
+    }
+
+    // Add Copy & WhatsApp Buttons to Card Footer
+    const cardFooter = card.querySelector('.card-footer');
+    if (cardFooter && !card.querySelector('.btn-copy-card')) {
+      const actionsContainer = cardFooter.querySelector('div:last-child') || cardFooter;
+
+      const title = card.querySelector('.product-title')?.textContent?.trim() || '';
+      const skuElem = card.querySelector('.product-sku span:first-child');
+      const rawSku = skuElem ? skuElem.textContent.replace('SKU:', '').trim() : '';
+      const price = card.querySelector('.price-value')?.textContent?.trim() || '';
+      const imgElem = card.querySelector('.card-image-wrap img');
+      const imgSrc = imgElem ? imgElem.getAttribute('src') : '';
+      const fullImgUrl = getAbsoluteProductImageUrl(imgSrc);
+      const specPills = Array.from(card.querySelectorAll('.spec-pill')).map(p => p.textContent.trim());
+      const shareUrl = `${window.location.origin}/catalog.html?sku=${encodeURIComponent(rawSku)}`;
+
+      const copyBtn = document.createElement('button');
+      copyBtn.type = 'button';
+      copyBtn.className = 'btn-icon-action btn-copy-card';
+      copyBtn.innerHTML = '📋 Copy';
+      copyBtn.title = 'Copy product details and specs';
+
+      copyBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        copyTextToClipboard(`⚡ ${title} - ${price} (SKU: ${rawSku})\nSpecs: ${specPills.slice(0, 3).join(', ')}\nPhoto: ${fullImgUrl}\nDetails: ${shareUrl}`, `Copied ${title}!`);
+      });
+
+      const waBtn = document.createElement('a');
+      waBtn.className = 'btn-icon-action btn-wa-card';
+      waBtn.innerHTML = '📲 Share';
+      waBtn.title = 'Share product on WhatsApp';
+      waBtn.target = '_blank';
+      waBtn.rel = 'noopener';
+
+      const cardWaMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Specs: ${specPills.slice(0, 3).join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 Order / View: ${shareUrl}`);
+      waBtn.href = `https://api.whatsapp.com/send?text=${cardWaMsg}`;
+      waBtn.addEventListener('click', (e) => e.stopPropagation());
+
+      actionsContainer.prepend(waBtn);
+      actionsContainer.prepend(copyBtn);
+    }
+  });
+
+  // 4. URL Param Auto-Open (e.g. catalog.html?sku=PWR-TP4056-TYPEC)
   const urlParams = new URLSearchParams(window.location.search);
+  const targetSku = urlParams.get('sku') || urlParams.get('product');
+
+  if (targetSku && productCards.length > 0) {
+    productCards.forEach(card => {
+      const skuText = card.querySelector('.product-sku')?.textContent || '';
+      if (skuText.includes(targetSku)) {
+        setTimeout(() => openProductModal(card), 200);
+      }
+    });
+  }
+
+  // 5. Pre-fill Contact Form from URL Params
   const requestedSku = urlParams.get('sku');
   const partInput = document.getElementById('partNumber');
   const messageInput = document.getElementById('inquiryMessage');
@@ -84,25 +327,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 4. WhatsApp Sharing Direct Integration
-  const whatsappButtons = document.querySelectorAll('.whatsapp-share-trigger');
-  whatsappButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const currentUrl = window.location.href;
-      const pageTitle = document.title;
-      const shareMessage = encodeURIComponent(`Check out this electronic component/kit on Electronix:\n*${pageTitle}*\n${currentUrl}`);
-      const whatsappUrl = `https://api.whatsapp.com/send?text=${shareMessage}`;
-      
-      if (window.trackEvent) {
-        window.trackEvent('whatsapp_share_clicked', { url: currentUrl });
-      }
-
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  // 6. Global Copy Buttons on Facts / Metrics / Disclaimers
+  document.querySelectorAll('[data-copy-text]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const textToCopy = btn.getAttribute('data-copy-text');
+      copyTextToClipboard(textToCopy, 'Copied to clipboard!');
     });
   });
 
-  // 5. Netlify Form Submission Enhancement (AJAX with fallback)
+  // 7. Netlify Form Submission Enhancement
   const contactForm = document.getElementById('netlifyContactForm');
   const formSuccessAlert = document.getElementById('formSuccessAlert');
 
@@ -133,14 +366,14 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         })
         .catch((error) => {
-          alert('Submission error. Please email us directly at support@electronix-enterprise.com');
+          alert('Submission error. Please email us directly at support@electronix-store.com');
           console.error(error);
         });
       }
     });
   }
 
-  // 6. Dynamic Copyright Year
+  // 8. Dynamic Copyright Year
   const yearElement = document.getElementById('currentYear');
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();

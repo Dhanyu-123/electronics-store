@@ -36,13 +36,13 @@
 <body>
 
   <!-- Top Announcement Bar -->
-  <div style="background-color: var(--ibm-gray-100); color: var(--ibm-white); padding: 0.45rem 0; font-size: 0.8rem; border-bottom: 1px solid var(--ibm-gray-80); font-family: var(--font-mono);">
+  <div class="top-bar">
     <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
       <div><span>🇮🇳 AFFORDABLE ELECTRONIC COMPONENTS &amp; KITS FOR STUDENTS &amp; MAKERS • ALL PRICES IN INR (₹)</span></div>
       <div style="display: flex; gap: 1.25rem;">
-        <a href="disclaimers.html#warranty" style="color: #a8a8a8; text-decoration: none;">Silicon Warranty</a>
-        <a href="disclaimers.html#esd" style="color: #a8a8a8; text-decoration: none;">ESD Protection</a>
-        <a href="contact.html" style="color: var(--ibm-blue-60); text-decoration: none; font-weight: 600;">RFQ Desk &rarr;</a>
+        <a href="disclaimers.html#warranty">Silicon Warranty</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html" class="rfq-highlight">RFQ Desk &rarr;</a>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="catalog.html" class="nav-link active">Components &amp; Kits</a></li>
           <li><a href="product-detail.html" class="nav-link">Showcase</a></li>
-          <li><a href="about.html" class="nav-link">Quality &amp; Lab</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
           <li><a href="disclaimers.html" class="nav-link">Disclaimers &amp; Safety</a></li>
           <li><a href="contact.html" class="nav-link">Contact &amp; RFQ</a></li>
         </ul>
@@ -86,14 +86,21 @@
     </div>
   </header>
 
-  <!-- Page Header Banner -->
-  <section style="background-color: var(--ibm-gray-100); color: var(--ibm-white); padding: 3rem 0; border-bottom: 2px solid var(--ibm-blue-60);">
-    <div class="container">
-      <span class="badge badge-green" style="margin-bottom: 0.5rem;">🇮🇳 LOW-COST STUDENT PRICING • ALL PRICES IN INR (₹)</span>
-      <h1 style="color: var(--ibm-white); margin-top: 0.5rem;">Electronic Components &amp; DIY Maker Kits</h1>
-      <p style="color: #c6c6c6; max-width: 760px; margin-top: 0.5rem;">
-        Affordable electronics engineered for Indian students, engineering labs, and makers. Explore budget-friendly Arduino boards, Raspberry Pis, precision sensors, microcontrollers, and complete STEM robotics kits with instant RFQ support.
-      </p>
+  <!-- Page Header Banner (High-Contrast Obsidian & Cyan) -->
+  <section style="background: linear-gradient(135deg, #0b0f19 0%, #151d2f 100%); color: #ffffff; padding: 3.5rem 0; border-bottom: 2px solid var(--color-brand-primary);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+      <div style="max-width: 780px;">
+        <span class="badge badge-green" style="margin-bottom: 0.5rem;">🇮🇳 LOW-COST STUDENT PRICING • ALL PRICES IN INR (₹)</span>
+        <h1 style="color: #ffffff; margin-top: 0.5rem; margin-bottom: 0.5rem;">Electronic Components &amp; DIY Maker Kits</h1>
+        <p style="color: #e2e8f0; font-size: 1.05rem; line-height: 1.65;">
+          Affordable electronics engineered for Indian students, engineering labs, and makers. Explore budget-friendly Arduino boards, Raspberry Pis, precision sensors, microcontrollers, and complete STEM robotics kits with instant RFQ support.
+        </p>
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary" style="border-color: #334155; color: #ffffff; font-size: 0.88rem; padding: 0.65rem 1.25rem;" data-copy-text="⚡ Electronix Store Catalog Highlights:&#10;• Genuine Arduino, Raspberry Pi, ESP32, STM32&#10;• Sensors, Microphones &amp; Power Modules&#10;• STEM Robotics Kits &amp; Lab Multimeters&#10;• Affordable Indian Rupee (₹) Pricing&#10;• Browse: https://electronix-store.netlify.app/catalog.html">
+          📋 Copy Catalog Facts
+        </button>
+      </div>
     </div>
   </section>
 
@@ -583,7 +590,7 @@
         <article class="product-card" data-category="kits">
           <div class="card-image-wrap">
             <span class="badge badge-warning card-badge-pos">BUNDLE</span>
-            <img data-bunny-src="/products/37-in-1-sensor-laboratory-kit.jpg" alt="37 in 1 Sensor Kit" loading="lazy">
+            <img src="assets/images/sensors-and-mic-pack.jpg" data-bunny-src="/products/37-in-1-sensor-laboratory-kit.jpg" alt="37 in 1 Sensor Kit" loading="lazy">
           </div>
           <div class="card-body">
             <div class="product-sku">
@@ -643,7 +650,7 @@
         <article class="product-card" data-category="kits">
           <div class="card-image-wrap">
             <span class="badge badge-blue card-badge-pos">MAKER KIT</span>
-            <img data-bunny-src="/products/dso-digital-oscilloscope-diy-kit.jpg" alt="DSO Oscilloscope" loading="lazy">
+            <img src="assets/images/lab-instruments-gear.jpg" data-bunny-src="/products/dso-digital-oscilloscope-diy-kit.jpg" alt="DSO Oscilloscope" loading="lazy">
           </div>
           <div class="card-body">
             <div class="product-sku">
@@ -961,7 +968,7 @@
               <span class="brand-tag">PRECISION HARDWARE</span>
             </div>
           </div>
-          <p style="color: #a8a8a8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">
+          <p style="color: #e2e8f0; font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.5rem;">
             Affordable genuine electronic components, Arduino boards, Raspberry Pis, and STEM kits for students, engineering colleges, and makers across India.
           </p>
           <a href="#" class="whatsapp-share-btn whatsapp-share-trigger">
@@ -973,43 +980,47 @@
         </div>
 
         <div class="footer-col">
-          <h5>Product Families</h5>
+          <h5>Product Catalog</h5>
           <ul class="footer-links">
-            <li><a href="catalog.html">Arduino &amp; Compatible Boards</a></li>
-            <li><a href="catalog.html">Raspberry Pi Single Board Computers</a></li>
-            <li><a href="catalog.html">Sensors &amp; Audio Microphones</a></li>
-            <li><a href="catalog.html">STEM &amp; Robotics DIY Kits</a></li>
-            <li><a href="catalog.html">Microcontrollers &amp; DSPs</a></li>
+            <li><a href="catalog.html?category=arduino">Arduino Boards &amp; Shields</a></li>
+            <li><a href="catalog.html?category=raspberry-pi">Raspberry Pi &amp; Pico</a></li>
+            <li><a href="catalog.html?category=microcontrollers">ESP32 &amp; STM32 Boards</a></li>
+            <li><a href="catalog.html?category=sensors">Sensors &amp; Microphones</a></li>
+            <li><a href="catalog.html?category=kits">STEM &amp; Robotics Kits</a></li>
+            <li><a href="catalog.html?category=power">Power Regulators &amp; Chargers</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Engineering &amp; Legal</h5>
+          <h5>Company &amp; Legal</h5>
           <ul class="footer-links">
-            <li><a href="disclaimers.html#esd">ESD Handling Guidelines</a></li>
-            <li><a href="disclaimers.html#warranty">Silicon Warranty &amp; Returns</a></li>
-            <li><a href="disclaimers.html#compliance">RoHS 3 &amp; REACH Compliance</a></li>
-            <li><a href="disclaimers.html#critical">Non-Critical Applications Notice</a></li>
-            <li><a href="disclaimers.html#terms">Full Terms of Service</a></li>
+            <li><a href="about.html">About Us &amp; Mission</a></li>
+            <li><a href="disclaimers.html">Safety &amp; ESD Disclaimers</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">RFQ &amp; Bulk Support</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Quick Contact</h5>
-          <p style="color: #a8a8a8; font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Technical RFQ Desk:</strong></p>
-          <p style="color: var(--ibm-blue-60); font-family: var(--font-mono); font-size: 0.95rem; margin-bottom: 1rem;">rfq@electronix-components.com</p>
-          <a href="contact.html" class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--ibm-white); border-color: var(--ibm-gray-70);">
-            Submit Formal RFQ
+          <h5>Direct Inquiries</h5>
+          <p style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 0.5rem;"><strong>Bangalore Technical Desk:</strong></p>
+          <a href="mailto:support@electronix-store.com?subject=Catalog%20Inquiry" class="mail-link" style="margin-bottom: 1rem;">
+            ✉️ support@electronix-store.com
+          </a>
+          <p style="color: #cbd5e1; font-size: 0.88rem; margin-top: 0.5rem;">Mon - Sat: 09:00 - 19:00 IST</p>
+          <a href="contact.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center;">
+            Submit Formal RFQ &rarr;
           </a>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>&copy; <span id="currentYear">2026</span> Electronix Precision Components Inc. Prices in Indian Rupees (INR ₹).</div>
+        <div>&copy; <span id="currentYear">2026</span> Electronix Components Platform. All rights reserved.</div>
         <div class="compliance-badges">
-          <span class="compliance-tag">RoHS 3 COMPLIANT</span>
-          <span class="compliance-tag">CE CERTIFIED</span>
-          <span class="compliance-tag">FCC CLASS B</span>
+          <span class="compliance-tag">RoHS 3</span>
+          <span class="compliance-tag">REACH</span>
+          <span class="compliance-tag">ANSI/ESD S20.20</span>
+          <span class="compliance-tag">DPDP Act 2023</span>
         </div>
       </div>
     </div>

@@ -43,13 +43,13 @@
 <body>
 
   <!-- Top Announcement Bar -->
-  <div style="background-color: var(--ibm-gray-100); color: var(--ibm-white); padding: 0.45rem 0; font-size: 0.8rem; border-bottom: 1px solid var(--ibm-gray-80); font-family: var(--font-mono);">
+  <div class="top-bar">
     <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
       <div><span>🇮🇳 AFFORDABLE ELECTRONIC COMPONENTS &amp; KITS FOR STUDENTS &amp; MAKERS • ALL PRICES IN INR (₹)</span></div>
       <div style="display: flex; gap: 1.25rem;">
-        <a href="disclaimers.html#esd" style="color: #a8a8a8; text-decoration: none;">ESD Advisory</a>
-        <a href="disclaimers.html#compliance" style="color: #a8a8a8; text-decoration: none;">RoHS Compliance</a>
-        <a href="contact.html" style="color: var(--ibm-blue-60); text-decoration: none; font-weight: 600;">RFQ Desk &rarr;</a>
+        <a href="disclaimers.html#esd">ESD Advisory</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html" class="rfq-highlight">RFQ Desk &rarr;</a>
       </div>
     </div>
   </div>
@@ -72,7 +72,7 @@
           <li><a href="index.html" class="nav-link active">Home</a></li>
           <li><a href="catalog.html" class="nav-link">Components &amp; Kits</a></li>
           <li><a href="product-detail.html" class="nav-link">Showcase</a></li>
-          <li><a href="about.html" class="nav-link">Quality &amp; Lab</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
           <li><a href="disclaimers.html" class="nav-link">Disclaimers &amp; Safety</a></li>
           <li><a href="contact.html" class="nav-link">Contact &amp; RFQ</a></li>
         </ul>
@@ -141,6 +141,9 @@
             <div class="stat-label">EU Environmental Compliance</div>
           </div>
         </div>
+        <button type="button" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%; font-size: 0.85rem; padding: 0.55rem 1rem; border-color: #334155; color: #ffffff;" data-copy-text="⚡ Electronix Platform Facts:&#10;• 100% Verified Authentic Silicon with CoC&#10;• <50ms Netlify / Bunny CDN Image Edge&#10;• 0.0s Netlify Serverless Cold Start&#10;• Full RoHS 3 &amp; ANSI/ESD S20.20 Compliance&#10;• https://electronix-store.netlify.app">
+          📋 Copy Platform Specs &amp; Facts
+        </button>
       </div>
     </div>
   </section>
@@ -595,7 +598,7 @@
               <span class="brand-tag">PRECISION HARDWARE</span>
             </div>
           </div>
-          <p style="color: #a8a8a8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">
+          <p style="color: #e2e8f0; font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.5rem;">
             Global supplier of genuine semiconductor silicon, passive components, sensor breakout modules, and engineering educational kits.
           </p>
           <a href="#" class="whatsapp-share-btn whatsapp-share-trigger" style="font-size: 0.8rem; padding: 0.5rem 1rem;">
@@ -607,47 +610,49 @@
         </div>
 
         <div class="footer-col">
-          <h5>Categories</h5>
+          <h5>Product Catalog</h5>
           <ul class="footer-links">
-            <li><a href="catalog.html">Microcontrollers &amp; DSPs</a></li>
-            <li><a href="catalog.html">Sensor Modules &amp; Breakouts</a></li>
-            <li><a href="catalog.html">STEM &amp; Robotics Kits</a></li>
-            <li><a href="catalog.html">Switching Power Converters</a></li>
-            <li><a href="catalog.html">Oscilloscopes &amp; Test Gear</a></li>
+            <li><a href="catalog.html?category=arduino">Arduino Boards &amp; Shields</a></li>
+            <li><a href="catalog.html?category=raspberry-pi">Raspberry Pi &amp; Pico</a></li>
+            <li><a href="catalog.html?category=microcontrollers">ESP32 &amp; STM32 Boards</a></li>
+            <li><a href="catalog.html?category=sensors">Sensors &amp; Microphones</a></li>
+            <li><a href="catalog.html?category=kits">STEM &amp; Robotics Kits</a></li>
+            <li><a href="catalog.html?category=power">Power Regulators &amp; Chargers</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Engineering &amp; Legal</h5>
+          <h5>Company &amp; Legal</h5>
           <ul class="footer-links">
-            <li><a href="disclaimers.html#esd">ESD Handling Guidelines</a></li>
-            <li><a href="disclaimers.html#warranty">Silicon Warranty &amp; Returns</a></li>
-            <li><a href="disclaimers.html#compliance">RoHS 3 &amp; REACH Compliance</a></li>
-            <li><a href="disclaimers.html#critical">Non-Critical Applications Notice</a></li>
-            <li><a href="disclaimers.html#terms">Full Terms of Service</a></li>
+            <li><a href="about.html">About Us &amp; Mission</a></li>
+            <li><a href="disclaimers.html">Safety &amp; ESD Disclaimers</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">RFQ &amp; Bulk Support</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Quick Contact</h5>
-          <p style="color: #a8a8a8; font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Technical RFQ Desk:</strong></p>
-          <p style="color: var(--ibm-blue-60); font-family: var(--font-mono); font-size: 0.95rem; margin-bottom: 1rem;">rfq@electronix-components.com</p>
-          <p style="color: #a8a8a8; font-size: 0.85rem;">Mon - Fri: 08:00 - 18:00 EST</p>
-          <a href="contact.html" class="btn btn-ghost" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--ibm-white); border-color: var(--ibm-gray-70);">
-            Submit Formal RFQ
+          <h5>Direct Inquiries</h5>
+          <p style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 0.5rem;"><strong>Bangalore Technical Desk:</strong></p>
+          <a href="mailto:support@electronix-store.com?subject=Component%20Inquiry" class="mail-link" style="margin-bottom: 1rem;">
+            ✉️ support@electronix-store.com
+          </a>
+          <p style="color: #cbd5e1; font-size: 0.88rem; margin-top: 0.5rem;">Mon - Sat: 09:00 - 19:00 IST</p>
+          <a href="contact.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center;">
+            Submit Formal RFQ &rarr;
           </a>
         </div>
       </div>
 
       <div class="footer-bottom">
         <div>
-          &copy; <span id="currentYear">2026</span> Electronix Precision Components Inc. All rights reserved. Built with IBM Carbon Design System on Netlify.
+          &copy; <span id="currentYear">2026</span> Electronix Components Platform. All rights reserved.
         </div>
         <div class="compliance-badges">
-          <span class="compliance-tag">RoHS 3 COMPLIANT</span>
-          <span class="compliance-tag">CE CERTIFIED</span>
-          <span class="compliance-tag">FCC CLASS B</span>
+          <span class="compliance-tag">RoHS 3</span>
+          <span class="compliance-tag">REACH</span>
           <span class="compliance-tag">ANSI/ESD S20.20</span>
+          <span class="compliance-tag">DPDP Act 2023</span>
         </div>
       </div>
     </div>

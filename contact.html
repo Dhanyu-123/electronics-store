@@ -36,12 +36,13 @@
 <body>
 
   <!-- Top Bar -->
-  <div style="background-color: var(--ibm-gray-100); color: var(--ibm-white); padding: 0.45rem 0; font-size: 0.8rem; border-bottom: 1px solid var(--ibm-gray-80); font-family: var(--font-mono);">
+  <div class="top-bar">
     <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
       <div><span>🇮🇳 AFFORDABLE ELECTRONIC COMPONENTS &amp; KITS FOR STUDENTS &amp; MAKERS • ALL PRICES IN INR (₹)</span></div>
       <div style="display: flex; gap: 1.25rem;">
-        <a href="disclaimers.html#warranty" style="color: #a8a8a8; text-decoration: none;">Return Policy</a>
-        <a href="catalog.html" style="color: var(--ibm-blue-60); text-decoration: none; font-weight: 600;">&larr; Catalog</a>
+        <a href="disclaimers.html#warranty">Return Policy</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="catalog.html" class="rfq-highlight">&larr; Catalog</a>
       </div>
     </div>
   </div>
@@ -62,7 +63,7 @@
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="catalog.html" class="nav-link">Components &amp; Kits</a></li>
           <li><a href="product-detail.html" class="nav-link">Showcase</a></li>
-          <li><a href="about.html" class="nav-link">Quality &amp; Lab</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
           <li><a href="disclaimers.html" class="nav-link">Disclaimers &amp; Safety</a></li>
           <li><a href="contact.html" class="nav-link active">Contact &amp; RFQ</a></li>
         </ul>
@@ -113,36 +114,40 @@
       <div class="form-layout">
 
         <!-- Left Column: Corporate Info & Direct Contacts -->
-        <div class="form-info-pane">
-          <span class="badge badge-blue" style="margin-bottom: 1rem;">GLOBAL HEADQUARTERS</span>
-          <h3>Technical Desk &amp; Distribution Center</h3>
-          <p style="color: #b0b0b0; font-size: 0.95rem; line-height: 1.6;">
-            We operate out of an ANSI/ESD S20.20 compliant cleanroom logistics facility equipped for reel cutting, tube repacking, and dry baking.
+        <div class="form-info-pane" style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm);">
+          <span class="badge badge-blue" style="margin-bottom: 1rem;">BANGALORE LOGISTICS HUB</span>
+          <h3 style="color: var(--color-text-primary); font-size: 1.4rem; margin-bottom: 0.75rem;">Technical Desk &amp; Distribution Center</h3>
+          <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.5rem;">
+            Operating from Bangalore, Karnataka with an ANSI/ESD S20.20 compliant cleanroom logistics facility equipped for reel cutting, anti-static repacking, and dry baking.
           </p>
 
-          <ul class="contact-method-list">
-            <li class="contact-method-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
+          <ul class="contact-method-list" style="list-style: none; padding: 0;">
+            <li class="contact-method-item" style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.25rem;">
+              <span style="font-size: 1.25rem;">✉️</span>
               <div>
-                <strong style="color: var(--ibm-white); display: block; font-size: 0.9rem;">Email Inquiries:</strong>
-                <span style="color: var(--ibm-blue-60); font-family: var(--font-mono); font-size: 0.9rem;">rfq@electronix-components.com</span>
+                <strong style="color: var(--color-text-primary); display: block; font-size: 0.92rem;">Direct Inquiries &amp; RFQs:</strong>
+                <a href="mailto:support@electronix-store.com?subject=Component%20Quote%20Request" class="mail-link" style="color: var(--color-brand-primary) !important; font-size: 0.95rem; font-weight: 700;">
+                  support@electronix-store.com
+                </a>
               </div>
             </li>
 
-            <li class="contact-method-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
+            <li class="contact-method-item" style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.25rem;">
+              <span style="font-size: 1.25rem;">📞</span>
               <div>
-                <strong style="color: var(--ibm-white); display: block; font-size: 0.9rem;">Engineering Hotline:</strong>
-                <span style="color: #c6c6c6; font-family: var(--font-mono); font-size: 0.9rem;">+1 (800) 555-SILICON</span>
+                <strong style="color: var(--color-text-primary); display: block; font-size: 0.92rem;">Engineering Hotline:</strong>
+                <a href="tel:+918023456789" style="color: var(--color-brand-primary); font-weight: 600; font-size: 0.92rem;">+91 (080) 2345-6789</a>
               </div>
             </li>
 
-            <li class="contact-method-item">
+            <li class="contact-method-item" style="display: flex; gap: 1rem; align-items: flex-start;">
+              <span style="font-size: 1.25rem;">📍</span>
+              <div>
+                <strong style="color: var(--color-text-primary); display: block; font-size: 0.92rem;">Facility Address:</strong>
+                <span style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;">Electronic City Phase 1, Hosur Road, Bangalore, Karnataka - 560100</span>
+              </div>
+            </li>
+          </ul>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
@@ -155,7 +160,7 @@
           </ul>
 
           <div style="border-top: 1px solid var(--ibm-gray-80); padding-top: 1.5rem;">
-            <p style="font-size: 0.85rem; color: #a8a8a8; margin-bottom: 1rem;">
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1rem;">
               Direct instant inquiry via WhatsApp messaging:
             </p>
             <a href="#" class="whatsapp-share-btn whatsapp-share-trigger" style="width: 100%; justify-content: center;">
@@ -277,35 +282,49 @@
               <span class="brand-tag">PRECISION HARDWARE</span>
             </div>
           </div>
-          <p style="color: #a8a8a8; font-size: 0.9rem; line-height: 1.6;">
-            Precision semiconductor distribution and educational engineering kits.
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem;">
+            India's dedicated source for genuine microcontrollers, active silicon, sensor breakout modules, and student-priced STEM educational kits.
           </p>
+          <a href="mailto:support@electronix-store.com?subject=Support%20Inquiry" class="mail-link">
+            ✉️ support@electronix-store.com
+          </a>
         </div>
         <div class="footer-col">
-          <h5>Navigation</h5>
+          <h5>Product Catalog</h5>
           <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="catalog.html">Components &amp; Kits</a></li>
-            <li><a href="product-detail.html">Product Detail</a></li>
-            <li><a href="about.html">Quality Assurance</a></li>
+            <li><a href="catalog.html?category=arduino">Arduino Boards &amp; Shields</a></li>
+            <li><a href="catalog.html?category=raspberry-pi">Raspberry Pi &amp; Pico</a></li>
+            <li><a href="catalog.html?category=microcontrollers">ESP32 &amp; STM32 Boards</a></li>
+            <li><a href="catalog.html?category=sensors">Sensors &amp; Microphones</a></li>
+            <li><a href="catalog.html?category=kits">STEM &amp; Robotics Kits</a></li>
+            <li><a href="catalog.html?category=power">Power Regulators &amp; Chargers</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h5>Engineering Disclaimers</h5>
+          <h5>Company &amp; Legal</h5>
           <ul class="footer-links">
-            <li><a href="disclaimers.html#esd">ESD Handling</a></li>
-            <li><a href="disclaimers.html#warranty">Silicon Warranty</a></li>
-            <li><a href="disclaimers.html#compliance">RoHS 3 Compliance</a></li>
-            <li><a href="disclaimers.html#battery">Lithium Battery Notice</a></li>
+            <li><a href="about.html">About Us &amp; Mission</a></li>
+            <li><a href="disclaimers.html">Safety &amp; ESD Disclaimers</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">RFQ &amp; Bulk Support</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h5>Direct Contact</h5>
-          <p style="color: var(--ibm-blue-60); font-family: var(--font-mono); font-size: 0.95rem;">rfq@electronix-components.com</p>
+          <h5>Direct Inquiries</h5>
+          <p style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 1rem;">
+            Need volume student kits, institutional invoices, or component datasheets?
+          </p>
+          <a href="contact.html" class="btn btn-primary" style="width: 100%; justify-content: center;">Submit RFQ Online &rarr;</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; <span id="currentYear">2026</span> Electronix Precision Components Inc. Deployed on Netlify.</div>
+        <div>&copy; <span id="currentYear">2026</span> Electronix Components Platform. All rights reserved.</div>
+        <div class="compliance-badges">
+          <span class="compliance-tag">RoHS 3</span>
+          <span class="compliance-tag">REACH</span>
+          <span class="compliance-tag">ANSI/ESD S20.20</span>
+          <span class="compliance-tag">DPDP Act 2023</span>
+        </div>
       </div>
     </div>
   </footer>
