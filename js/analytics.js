@@ -4,11 +4,11 @@
  */
 
 const ANALYTICS_CONFIG = {
-  // Replace with your Google Analytics 4 Measurement ID (e.g., 'G-XXXXXXXXXX')
-  gaMeasurementId: 'G-ELECKIT001',
+  // Google Analytics 4 Measurement ID
+  gaMeasurementId: 'G-BX37BX47P3',
   
-  // Replace with your Microsoft Clarity Project ID (e.g., 'abcdef1234')
-  clarityProjectId: 'clarity_project_sample_id',
+  // Microsoft Clarity Project ID
+  clarityProjectId: 'ynu3c1fcwb',
 
   // Set to true in production
   enabled: true
@@ -17,18 +17,21 @@ const ANALYTICS_CONFIG = {
 (function initAnalytics() {
   if (!ANALYTICS_CONFIG.enabled) return;
 
+  const gaId = (ANALYTICS_CONFIG.gaMeasurementId || '').trim();
+  const clarityId = (ANALYTICS_CONFIG.clarityProjectId || '').replace(/^id-/, '').trim();
+
   // 1. Google Analytics 4 Integration
-  if (ANALYTICS_CONFIG.gaMeasurementId && ANALYTICS_CONFIG.gaMeasurementId !== 'G-ELECKIT001') {
+  if (gaId && !gaId.includes('SAMPLE') && !gaId.includes('ELECKIT')) {
     const gaScript = document.createElement('script');
     gaScript.async = true;
-    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_CONFIG.gaMeasurementId}`;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
     document.head.appendChild(gaScript);
 
     window.dataLayer = window.dataLayer || [];
     function gtag() { window.dataLayer.push(arguments); }
     window.gtag = gtag;
     gtag('js', new Date());
-    gtag('config', ANALYTICS_CONFIG.gaMeasurementId, {
+    gtag('config', gaId, {
       anonymize_ip: true,
       send_page_view: true
     });
@@ -40,12 +43,12 @@ const ANALYTICS_CONFIG = {
   }
 
   // 2. Microsoft Clarity Integration
-  if (ANALYTICS_CONFIG.clarityProjectId && ANALYTICS_CONFIG.clarityProjectId !== 'clarity_project_sample_id') {
+  if (clarityId && !clarityId.includes('sample')) {
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", ANALYTICS_CONFIG.clarityProjectId);
+    })(window, document, "clarity", "script", clarityId);
   } else {
     // Development / fallback stub
     window.clarity = function() {
