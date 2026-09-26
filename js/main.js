@@ -235,12 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const fullImgUrl = getAbsoluteProductImageUrl(imgSrc);
-    const shareUrl = `${window.location.origin}/catalog.html?sku=${encodeURIComponent(rawSku)}`;
-    const copyContent = `⚡ ${title}\n💰 Price: ${price} (SKU: ${rawSku})\n📋 Specs: ${specPills.join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 Order / View: ${shareUrl}`;
+    const skuSlug = rawSku.toLowerCase().replace(/[^a-z0-9\-]/g, '');
+    const productPageUrl = `https://electronix-store.netlify.app/products/${skuSlug}.html`;
+    const copyContent = `⚡ ${title}\n💰 Price: ${price} (SKU: ${rawSku})\n📋 Specs: ${specPills.join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 View 3D Photo & Details: ${productPageUrl}`;
 
     modalCopyBtn.onclick = () => copyTextToClipboard(copyContent, `Copied "${title}" specs!`);
 
-    const waMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Specs: ${specPills.slice(0, 3).join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 Order / View on Electronix: ${shareUrl}`);
+    const waMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Key Specs: ${specPills.slice(0, 3).join(' • ')}\n\n🔍 *View 3D Photo & Specifications:*\n${productPageUrl}`);
     modalWhatsAppBtn.href = `https://api.whatsapp.com/send?text=${waMsg}`;
 
     modalRfqBtn.href = `contact.html?sku=${encodeURIComponent(rawSku)}`;
@@ -273,7 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const imgSrc = imgElem ? imgElem.getAttribute('src') : '';
       const fullImgUrl = getAbsoluteProductImageUrl(imgSrc);
       const specPills = Array.from(card.querySelectorAll('.spec-pill')).map(p => p.textContent.trim());
-      const shareUrl = `${window.location.origin}/catalog.html?sku=${encodeURIComponent(rawSku)}`;
+      const skuSlug = rawSku.toLowerCase().replace(/[^a-z0-9\-]/g, '');
+      const productPageUrl = `https://electronix-store.netlify.app/products/${skuSlug}.html`;
 
       const copyBtn = document.createElement('button');
       copyBtn.type = 'button';
@@ -288,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       copyBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        copyTextToClipboard(`⚡ ${title} - ${price} (SKU: ${rawSku})\nSpecs: ${specPills.slice(0, 3).join(', ')}\nPhoto: ${fullImgUrl}\nDetails: ${shareUrl}`, `Copied ${title}!`);
+        copyTextToClipboard(`⚡ ${title} - ${price} (SKU: ${rawSku})\nSpecs: ${specPills.slice(0, 3).join(', ')}\nPhoto: ${fullImgUrl}\nDetails: ${productPageUrl}`, `Copied ${title}!`);
       });
 
       const waBtn = document.createElement('a');
@@ -302,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
       waBtn.target = '_blank';
       waBtn.rel = 'noopener';
 
-      const cardWaMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Specs: ${specPills.slice(0, 3).join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 Order / View: ${shareUrl}`);
+      const cardWaMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Key Specs: ${specPills.slice(0, 3).join(' • ')}\n\n🔍 *View 3D Photo & Specifications:*\n${productPageUrl}`);
       waBtn.href = `https://api.whatsapp.com/send?text=${cardWaMsg}`;
       waBtn.addEventListener('click', (e) => e.stopPropagation());
 
@@ -410,5 +412,59 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // 10. Universal Form Validation & Submit Button States (Grey -> Blue)
+  function initUniversalSubmitValidation() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+      const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+      if (!submitBtn) return;
+
+      function validateForm() {
+        const requiredInputs = Array.from(form.querySelectorAll('[required]'));
+        let allValid = true;
+
+        requiredInputs.forEach(input => {
+          if (input.type === 'checkbox' || input.type === 'radio') {
+            if (!input.checked) allValid = false;
+          } else if (input.type === 'email') {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!input.value.trim() || !emailPattern.test(input.value.trim())) {
+              allValid = false;
+            }
+          } else {
+            if (!input.value.trim() || input.value.trim().length < 2) {
+              allValid = false;
+            }
+          }
+        });
+
+        // Also check native HTML5 checkValidity
+        if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+          allValid = false;
+        }
+
+        if (allValid) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('btn-disabled');
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.classList.add('btn-disabled');
+        }
+      }
+
+      // Initial check (disabled & grey by default)
+      validateForm();
+
+      // Listen on all user events
+      form.addEventListener('input', validateForm);
+      form.addEventListener('change', validateForm);
+      form.addEventListener('keyup', validateForm);
+      form.addEventListener('paste', () => setTimeout(validateForm, 50));
+    });
+  }
+
+  initUniversalSubmitValidation();
 });
+
 

@@ -785,6 +785,49 @@ textarea.form-control {
   gap: 1.25rem;
 }
 
+/* Submit Buttons: Grey when Disabled/Incomplete -> Royal Blue when Enabled */
+button[type="submit"],
+.btn[type="submit"],
+input[type="submit"] {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button[type="submit"]:disabled,
+.btn[type="submit"]:disabled,
+input[type="submit"]:disabled,
+button[type="submit"].btn-disabled,
+.btn[type="submit"].btn-disabled {
+  background-color: #94a3b8 !important;
+  border-color: #cbd5e1 !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  opacity: 0.75 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+
+button[type="submit"]:not(:disabled),
+.btn[type="submit"]:not(:disabled),
+input[type="submit"]:not(:disabled) {
+  background-color: #0f62fe !important;
+  border-color: #0f62fe !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  box-shadow: 0 4px 6px -1px rgba(15, 98, 254, 0.25) !important;
+  pointer-events: auto !important;
+}
+
+button[type="submit"]:not(:disabled):hover,
+.btn[type="submit"]:not(:disabled):hover,
+input[type="submit"]:not(:disabled):hover {
+  background-color: #0043ce !important;
+  border-color: #0043ce !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 14px -2px rgba(15, 98, 254, 0.4) !important;
+}
+
 /* 11. Disclaimer & Safety Cards */
 .disclaimer-card {
   border: 1px solid var(--color-border);
