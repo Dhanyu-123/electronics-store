@@ -147,7 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="modal-magnified-wrap">
               <img id="modalProductImg" src="" alt="Product view" loading="lazy">
             </div>
-            <div style="font-size: 0.8rem; color: #64748b; text-align: center;">🔍 Hover over image to inspect magnified silicon details</div>
+            <div style="font-size: 0.82rem; color: #475569; display: flex; align-items: center; justify-content: center; gap: 0.45rem; font-weight: 500; margin-top: 0.5rem;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>Hover over image to inspect magnified silicon details</span>
+            </div>
           </div>
           <div class="modal-details-col">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -165,11 +173,18 @@ document.addEventListener('DOMContentLoaded', () => {
             <!-- Quick Actions -->
             <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: auto;">
               <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                <button id="modalCopyBtn" class="btn btn-secondary" style="flex: 1; padding: 0.75rem 1rem;">
-                  📋 Copy Product Details
+                <button id="modalCopyBtn" class="btn btn-secondary" style="flex: 1; padding: 0.75rem 1rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>Copy Product Details</span>
                 </button>
-                <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn" style="background-color: #25d366; color: #ffffff !important; flex: 1; padding: 0.75rem 1rem;">
-                  📲 Share on WhatsApp
+                <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn" style="background-color: #25d366; color: #ffffff !important; flex: 1; padding: 0.75rem 1rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.542 1.987.829 2.801.829h.005c3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.589-5.766-5.779-5.766zm9.969 5.828c0 5.523-4.477 10-10 10-1.745 0-3.385-.45-4.819-1.237l-5.181 1.357 1.379-5.037c-.86-1.472-1.379-3.195-1.379-5.083 0-5.523 4.477-10 10-10s10 4.477 10 10z"/>
+                  </svg>
+                  <span>Share on WhatsApp</span>
                 </a>
               </div>
               <a id="modalRfqBtn" href="#" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">
