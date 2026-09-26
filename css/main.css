@@ -608,29 +608,30 @@
   top: 1.25rem;
   right: 1.25rem;
   background: #f1f5f9;
-  border: none;
+  border: 1px solid #cbd5e1;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  color: var(--color-text-secondary);
+  font-size: 1.35rem;
+  color: #0f172a;
   cursor: pointer;
-  z-index: 10;
+  z-index: 25;
   transition: all 0.2s ease;
 }
 
 .modal-close-btn:hover {
-  background: #e2e8f0;
-  color: var(--color-text-primary);
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
 }
 
 .modal-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 2.25rem;
   padding: 2.25rem;
 }
 
@@ -643,7 +644,8 @@
 .modal-details-col {
   display: flex;
   flex-direction: column;
-  padding-right: 2.5rem;
+  padding-right: 3.5rem;
+  padding-top: 0.5rem;
 }
 
 .modal-magnified-wrap {
@@ -843,26 +845,19 @@ input[type="submit"]:not(:disabled):hover {
   box-shadow: 0 6px 14px -2px rgba(15, 98, 254, 0.4) !important;
 }
 
-/* 11. Disclaimer & Safety Cards - Plain, Minimalist & Professional */
+/* 11. Disclaimer & Safety Cards - Completely Plain, Minimalist & Professional */
 .disclaimer-card {
-  border: 1px solid var(--color-border);
+  border: 1px solid #cbd5e1;
   background-color: #ffffff !important;
-  border-radius: var(--radius-md);
+  border-radius: 8px;
   padding: 2.25rem;
   margin-bottom: 2rem;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.25s ease;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease;
 }
 
 .disclaimer-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: #cbd5e1;
-}
-
-.disclaimer-card.disclaimer-blue {
-  border-color: var(--color-border) !important;
-  border-left: 1px solid var(--color-border) !important;
-  background: #ffffff !important;
+  border-color: #94a3b8;
 }
 
 .disclaimer-card-header {
@@ -871,44 +866,35 @@ input[type="submit"]:not(:disabled):hover {
   align-items: flex-start;
   gap: 1.25rem;
   margin-bottom: 1.25rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
   padding-bottom: 0.85rem;
-}
-
-.disclaimer-card .badge {
-  background-color: #f1f5f9 !important;
-  color: #334155 !important;
-  border: 1px solid #cbd5e1 !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.05em;
 }
 
 .disclaimer-card-header h3,
 .disclaimer-card h3 {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  flex-wrap: wrap;
   margin: 0;
-  color: var(--color-text-primary) !important;
-  font-size: 1.22rem;
+  color: #0f172a !important;
+  font-size: 1.2rem;
   font-weight: 700;
+  line-height: 1.4;
+  font-family: var(--font-sans);
 }
 
 .disclaimer-card p,
 .disclaimer-card li {
-  color: var(--color-text-secondary);
+  color: #334155;
   line-height: 1.75;
+  font-family: var(--font-sans);
 }
 
 .copy-disclaimer-btn {
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 6px;
   border: 1px solid #cbd5e1;
   background-color: #f8fafc;
-  color: #334155;
+  color: #475569;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -920,6 +906,143 @@ input[type="submit"]:not(:disabled):hover {
   background-color: #0f172a;
   color: #ffffff;
   border-color: #0f172a;
+}
+
+/* 11b. Universal Share Modal */
+.share-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  padding: 1rem;
+}
+
+.share-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.share-modal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 440px;
+  padding: 1.75rem;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-border);
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
+
+.share-modal-backdrop.active .share-modal-card {
+  transform: scale(1);
+}
+
+.share-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.share-modal-close-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-modal-close-btn:hover {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+.share-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.share-opt-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #0f172a;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-opt-btn:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.share-opt-whatsapp {
+  color: #15803d;
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+.share-opt-whatsapp:hover {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.share-opt-email {
+  color: #1d4ed8;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+.share-opt-email:hover {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+.share-opt-msg {
+  color: #0369a1;
+  background: #f0f9ff;
+  border-color: #bae6fd;
+}
+.share-opt-msg:hover {
+  background: #e0f2fe;
+  border-color: #7dd3fc;
+}
+
+.share-opt-copy {
+  color: #334155;
+  background: #f8fafc;
+}
+.share-opt-copy:hover {
+  background: #f1f5f9;
 }
 
 
