@@ -147,13 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="modal-magnified-wrap">
               <img id="modalProductImg" src="" alt="Product view" loading="lazy">
             </div>
-            <div style="font-size: 0.82rem; color: #475569; display: flex; align-items: center; justify-content: center; gap: 0.45rem; font-weight: 500; margin-top: 0.5rem;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                <line x1="11" y1="8" x2="11" y2="14"></line>
-                <line x1="8" y1="11" x2="14" y2="11"></line>
-              </svg>
+            <div style="font-size: 0.84rem; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-weight: 600; margin-top: 0.65rem; background: #f1f5f9; padding: 0.45rem 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+              <span style="font-size: 1.15rem; line-height: 1;" aria-hidden="true">🔍</span>
               <span>Hover over image to inspect magnified silicon details</span>
             </div>
           </div>

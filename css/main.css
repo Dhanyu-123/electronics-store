@@ -1127,3 +1127,18 @@ input[type="submit"]:not(:disabled):hover {
     padding: 0.4rem 0;
   }
 }
+
+/* 23. Technical Features / Enterprise Supply Chain Section */
+.tech-features-section {
+  position: relative;
+}
+
+.feature-box {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.feature-box:hover {
+  transform: translateY(-3px);
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md) !important;
+}
