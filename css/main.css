@@ -133,14 +133,9 @@
   transition: all 0.2s ease;
 }
 
-/* 2. Announcement Bar */
+/* 2. Announcement Bar (Hidden per user request to remove top black box) */
 .top-bar {
-  background-color: #0b0f19;
-  color: #ffffff;
-  padding: 0.55rem 0;
-  font-size: 0.82rem;
-  border-bottom: 1px solid #1e293b;
-  font-weight: 600;
+  display: none !important;
 }
 
 .top-bar a {
@@ -645,6 +640,12 @@
   gap: 1rem;
 }
 
+.modal-details-col {
+  display: flex;
+  flex-direction: column;
+  padding-right: 2.5rem;
+}
+
 .modal-magnified-wrap {
   width: 100%;
   height: 340px;
@@ -842,26 +843,26 @@ input[type="submit"]:not(:disabled):hover {
   box-shadow: 0 6px 14px -2px rgba(15, 98, 254, 0.4) !important;
 }
 
-/* 11. Disclaimer & Safety Cards */
+/* 11. Disclaimer & Safety Cards - Plain, Minimalist & Professional */
 .disclaimer-card {
   border: 1px solid var(--color-border);
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   border-radius: var(--radius-md);
   padding: 2.25rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 2rem;
   box-shadow: var(--shadow-sm);
   transition: all 0.25s ease;
 }
 
 .disclaimer-card:hover {
   box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
 }
 
-/* Blue Accent Theme for All Sections 1 to 9 */
 .disclaimer-card.disclaimer-blue {
-  border-color: #93c5fd !important;
-  border-left: 6px solid #2563eb !important;
-  background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%) !important;
+  border-color: var(--color-border) !important;
+  border-left: 1px solid var(--color-border) !important;
+  background: #ffffff !important;
 }
 
 .disclaimer-card-header {
@@ -870,8 +871,16 @@ input[type="submit"]:not(:disabled):hover {
   align-items: flex-start;
   gap: 1.25rem;
   margin-bottom: 1.25rem;
-  border-bottom: 1px solid #bfdbfe;
+  border-bottom: 1px solid #f1f5f9;
   padding-bottom: 0.85rem;
+}
+
+.disclaimer-card .badge {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em;
 }
 
 .disclaimer-card-header h3,
@@ -881,33 +890,36 @@ input[type="submit"]:not(:disabled):hover {
   gap: 0.85rem;
   flex-wrap: wrap;
   margin: 0;
-  color: #1d4ed8 !important;
-  font-size: 1.25rem;
+  color: var(--color-text-primary) !important;
+  font-size: 1.22rem;
   font-weight: 700;
+}
+
+.disclaimer-card p,
+.disclaimer-card li {
+  color: var(--color-text-secondary);
+  line-height: 1.75;
 }
 
 .copy-disclaimer-btn {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid #93c5fd;
-  background-color: #ffffff;
-  color: #1d4ed8;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  color: #334155;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .copy-disclaimer-btn:hover {
-  background-color: #dbeafe;
-  color: #1e40af;
-  border-color: #3b82f6;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+  background-color: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
 }
 
 
@@ -932,12 +944,34 @@ input[type="submit"]:not(:disabled):hover {
   margin-bottom: 0.85rem;
 }
 
-/* 12. Footer (Crisp White Text & Cyan Highlights - Zero Gray on Black) */
+/* 12. Footer (Crisp White Text on Black - Strictly Zero Blue/Gray on Black) */
 .site-footer {
   background-color: #0b0f19;
   color: #ffffff !important;
-  border-top: 2px solid var(--color-brand-primary);
+  border-top: 2px solid #334155;
   padding: 4.5rem 0 2rem;
+}
+
+.site-footer .mail-link {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.site-footer .mail-link:hover {
+  color: #ffffff !important;
+  opacity: 0.85;
+}
+
+.site-footer .brand-text {
+  color: #ffffff !important;
+}
+
+.site-footer .brand-tag {
+  color: #ffffff !important;
 }
 
 .footer-grid {
@@ -975,12 +1009,13 @@ input[type="submit"]:not(:disabled):hover {
   font-size: 0.95rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .footer-links a:hover {
-  color: #38bdf8 !important; /* Glowing cyan */
+  color: #ffffff !important; /* Crisp white on hover - NO BLUE ON BLACK */
   text-decoration: underline !important;
+  opacity: 0.85;
 }
 
 .footer-bottom {

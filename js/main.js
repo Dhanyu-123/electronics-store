@@ -133,6 +133,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Universal Web Share API with WhatsApp Fallback (One click to share to Messages, Email, WhatsApp, Files, etc.)
+  async function shareContent({ title, text, url }) {
+    const shareData = {
+      title: title || 'Electronix | Affordable Electronic Components',
+      text: text || 'Authentic electronic components, development boards, and STEM kits with verified datasheets.',
+      url: url || window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+      }
+    }
+
+    // Fallback: Direct WhatsApp Web
+    const waPayload = encodeURIComponent(`${shareData.text ? shareData.text + '\n\n' : ''}${shareData.url}`);
+    window.open(`https://api.whatsapp.com/send?text=${waPayload}`, '_blank', 'noopener,noreferrer');
+  }
+
   // 3. Interactive Magnified Product Modal & Details Viewer
   let modalBackdrop = document.getElementById('productDetailModal');
   if (!modalBackdrop) {
@@ -153,9 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
           <div class="modal-details-col">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span id="modalSku" style="font-family: var(--font-mono); font-weight: 700; color: #2563eb; font-size: 0.88rem;"></span>
+            <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap;">
               <span id="modalBadge" class="badge badge-green">IN STOCK</span>
+              <span id="modalSku" style="font-family: var(--font-mono); font-weight: 700; color: #2563eb; font-size: 0.88rem;"></span>
             </div>
             <h2 id="modalTitle" style="font-size: 1.5rem; margin-bottom: 0.75rem; color: #0f172a;"></h2>
             <div style="display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.25rem;">
@@ -173,14 +195,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                   </svg>
-                  <span>Copy Product Details</span>
+                  <span>Copy Specs</span>
                 </button>
-                <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn" style="background-color: #25d366; color: #ffffff !important; flex: 1; padding: 0.75rem 1rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.542 1.987.829 2.801.829h.005c3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.589-5.766-5.779-5.766zm9.969 5.828c0 5.523-4.477 10-10 10-1.745 0-3.385-.45-4.819-1.237l-5.181 1.357 1.379-5.037c-.86-1.472-1.379-3.195-1.379-5.083 0-5.523 4.477-10 10-10s10 4.477 10 10z"/>
+                <button id="modalShareBtn" type="button" class="btn" style="background-color: #2563eb; color: #ffffff !important; flex: 1; padding: 0.75rem 1rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                   </svg>
-                  <span>Share on WhatsApp</span>
-                </a>
+                  <span>Share Product</span>
+                </button>
               </div>
               <a id="modalRfqBtn" href="#" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">
                 Request Official Quote / Inquire &rarr;
@@ -201,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalDesc = document.getElementById('modalDesc');
   const modalSpecs = document.getElementById('modalSpecs');
   const modalCopyBtn = document.getElementById('modalCopyBtn');
-  const modalWhatsAppBtn = document.getElementById('modalWhatsAppBtn');
+  const modalShareBtn = document.getElementById('modalShareBtn');
   const modalRfqBtn = document.getElementById('modalRfqBtn');
 
   function closeModal() {
@@ -226,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const desc = card.querySelector('.product-desc')?.textContent?.trim() || '';
     const imgElem = card.querySelector('.card-image-wrap img');
     const imgSrc = imgElem ? imgElem.getAttribute('src') : '';
-    const badgeText = card.querySelector('.card-badge-pos')?.textContent?.trim() || 'IN STOCK';
     const specPills = Array.from(card.querySelectorAll('.spec-pill')).map(p => p.textContent.trim());
 
     modalTitle.textContent = title;
@@ -244,15 +269,21 @@ document.addEventListener('DOMContentLoaded', () => {
       modalSpecs.appendChild(span);
     });
 
-    const fullImgUrl = getAbsoluteProductImageUrl(imgSrc);
     const skuSlug = rawSku.toLowerCase().replace(/[^a-z0-9\-]/g, '');
     const productPageUrl = `https://electronix-store.netlify.app/products/${skuSlug}.html`;
-    const copyContent = `⚡ ${title}\n💰 Price: ${price} (SKU: ${rawSku})\n📋 Specs: ${specPills.join(', ')}\n🖼️ Product Photo: ${fullImgUrl}\n🔗 View 3D Photo & Details: ${productPageUrl}`;
+    
+    // Product Page URL placed first so WhatsApp immediately parses the OpenGraph image preview
+    const copyContent = `${productPageUrl}\n\n⚡ ${title} (SKU: ${rawSku})\n💰 Price: ${price}\n📋 Specs: ${specPills.join(', ')}`;
 
-    modalCopyBtn.onclick = () => copyTextToClipboard(copyContent, `Copied "${title}" specs!`);
+    modalCopyBtn.onclick = () => copyTextToClipboard(copyContent, `Copied "${title}" link & specs!`);
 
-    const waMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Key Specs: ${specPills.slice(0, 3).join(' • ')}\n\n🔍 *View 3D Photo & Specifications:*\n${productPageUrl}`);
-    modalWhatsAppBtn.href = `https://api.whatsapp.com/send?text=${waMsg}`;
+    modalShareBtn.onclick = () => {
+      shareContent({
+        title: `${title} • ${price}`,
+        text: `⚡ ${title} (SKU: ${rawSku})\n💰 Price: ${price}\n📋 Specs: ${specPills.slice(0, 3).join(' • ')}`,
+        url: productPageUrl
+      });
+    };
 
     modalRfqBtn.href = `contact.html?sku=${encodeURIComponent(rawSku)}`;
 
@@ -271,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cardTitle.addEventListener('click', () => openProductModal(card));
     }
 
-    // Add Copy & WhatsApp Buttons to Card Footer
+    // Add Copy & Universal Share Buttons to Card Footer
     const cardFooter = card.querySelector('.card-footer');
     if (cardFooter && !card.querySelector('.btn-copy-card')) {
       const actionsContainer = cardFooter.querySelector('div:last-child') || cardFooter;
@@ -280,9 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const skuElem = card.querySelector('.product-sku span:first-child');
       const rawSku = skuElem ? skuElem.textContent.replace('SKU:', '').trim() : '';
       const price = card.querySelector('.price-value')?.textContent?.trim() || '';
-      const imgElem = card.querySelector('.card-image-wrap img');
-      const imgSrc = imgElem ? imgElem.getAttribute('src') : '';
-      const fullImgUrl = getAbsoluteProductImageUrl(imgSrc);
       const specPills = Array.from(card.querySelectorAll('.spec-pill')).map(p => p.textContent.trim());
       const skuSlug = rawSku.toLowerCase().replace(/[^a-z0-9\-]/g, '');
       const productPageUrl = `https://electronix-store.netlify.app/products/${skuSlug}.html`;
@@ -296,29 +324,37 @@ document.addEventListener('DOMContentLoaded', () => {
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
         </svg>
       `;
-      copyBtn.title = 'Copy product details and specs';
+      copyBtn.title = 'Copy product details and link';
 
       copyBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        copyTextToClipboard(`⚡ ${title} - ${price} (SKU: ${rawSku})\nSpecs: ${specPills.slice(0, 3).join(', ')}\nPhoto: ${fullImgUrl}\nDetails: ${productPageUrl}`, `Copied ${title}!`);
+        copyTextToClipboard(`${productPageUrl}\n\n⚡ ${title} (SKU: ${rawSku})\n💰 Price: ${price}\nSpecs: ${specPills.slice(0, 3).join(', ')}`, `Copied ${title}!`);
       });
 
-      const waBtn = document.createElement('a');
-      waBtn.className = 'btn-icon-logo btn-wa-logo btn-wa-card';
-      waBtn.innerHTML = `
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.542 1.987.829 2.801.829h.005c3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.589-5.766-5.779-5.766zm9.969 5.828c0 5.523-4.477 10-10 10-1.745 0-3.385-.45-4.819-1.237l-5.181 1.357 1.379-5.037c-.86-1.472-1.379-3.195-1.379-5.083 0-5.523 4.477-10 10-10s10 4.477 10 10z"/>
+      const shareBtn = document.createElement('button');
+      shareBtn.type = 'button';
+      shareBtn.className = 'btn-icon-logo btn-share-logo btn-share-card';
+      shareBtn.innerHTML = `
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
         </svg>
       `;
-      waBtn.title = 'Share product on WhatsApp';
-      waBtn.target = '_blank';
-      waBtn.rel = 'noopener';
+      shareBtn.title = 'Share to WhatsApp, Messages, Email & Apps';
 
-      const cardWaMsg = encodeURIComponent(`⚡ *${title}*\n💰 Price: *${price}* (SKU: ${rawSku})\n📋 Key Specs: ${specPills.slice(0, 3).join(' • ')}\n\n🔍 *View 3D Photo & Specifications:*\n${productPageUrl}`);
-      waBtn.href = `https://api.whatsapp.com/send?text=${cardWaMsg}`;
-      waBtn.addEventListener('click', (e) => e.stopPropagation());
+      shareBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        shareContent({
+          title: `${title} • ${price}`,
+          text: `⚡ ${title} (SKU: ${rawSku})\n💰 Price: ${price}\n📋 Key Specs: ${specPills.slice(0, 3).join(' • ')}`,
+          url: productPageUrl
+        });
+      });
 
-      actionsContainer.prepend(waBtn);
+      actionsContainer.prepend(shareBtn);
       actionsContainer.prepend(copyBtn);
     }
   });
@@ -475,6 +511,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initUniversalSubmitValidation();
+
+  // 11. Wire all Top & Global Share Buttons & Direct Engineer WhatsApp Chat
+  document.querySelectorAll('.whatsapp-share-trigger, .nav-share-trigger').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const text = (btn.textContent || '').toLowerCase();
+      if (btn.classList.contains('chat-engineer-btn') || text.includes('engineer')) {
+        window.open('https://api.whatsapp.com/send?phone=918023456789&text=Hello%20Electronix%20Engineering%20Desk%2C%20I%20have%20an%20inquiry%20regarding%20component%20specifications%20and%20orders.', '_blank', 'noopener,noreferrer');
+        return;
+      }
+
+      shareContent({
+        title: document.title || 'Electronix | Affordable Electronic Components',
+        text: '⚡ Check out Electronix - Affordable Electronic Components & Authentic Silicon in India:\n',
+        url: window.location.href
+      });
+    });
+  });
 });
 
 
